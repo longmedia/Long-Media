@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Khóa Học Quay Dựng Chuyên Nghiệp</title>
+  <style>
+    /* Màu sắc chủ đạo */
+    :root {
+      --primary-color: #0057B7; /* Xanh dương đậm */
+      --accent-color: #FFB400;  /* Vàng cam */
+      --supp-cyan: #00AEEF;     /* Xanh cyan */
+      --supp-neon: #FFD700;     /* Vàng neon */
+      --text-color: #333;
+      --bg-light: #f9f9f9;
+    }
+
+    /* Reset & cơ bản */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background-color: var(--bg-light);
+      color: var(--text-color);
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    /* Keyframes cho hiệu ứng animate */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes pulseTech {
+      0% {
+        transform: scale(1);
+        filter: brightness(100%);
+      }
+      50% {
+        transform: scale(1.03);
+        filter: brightness(120%);
+      }
+      100% {
+        transform: scale(1);
+        filter: brightness(100%);
+      }
+    }
+
+    /* Container chính */
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--primary-color), #003e8a);
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
+      border-radius: 10px;
+      margin-bottom: 40px;
+      animation: fadeInUp 1s ease-out;
+      position: relative;
+    }
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+    header img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 25px;
+      border-radius: 10px;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+    /* Nút bật/tắt âm thanh */
+    #toggleAudio {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+    }
+    #toggleAudio:hover {
+      background-color: var(--supp-neon);
+    }
+    /* CTA Button in header */
+    .btn {
+      display: inline-block;
+      background-color: var(--accent-color);
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-decoration: none;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+      margin-top: 20px;
+    }
+    .btn:hover {
+      background-color: var(--supp-neon);
+      transform: scale(1.05);
+    }
+    /* Các section chung */
+    .section {
+      background-color: white;
+      padding: 30px 25px;
+      margin-bottom: 40px;
+      border-radius: 8px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+      animation: fadeInUp 1s ease-out;
+    }
+    .section h2 {
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      font-size: 2rem;
+      border-bottom: 3px solid var(--supp-cyan);
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    .section p {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+    .section ul {
+      list-style: disc inside;
+      margin: 15px 0 25px 20px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+    .section img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 20px 0;
+      animation: pulseTech 2s infinite;
+    }
+    /* Testimonials */
+    .testimonial {
+      font-style: italic;
+      background-color: var(--supp-cyan);
+      padding: 20px;
+      border-left: 5px solid var(--accent-color);
+      margin-bottom: 20px;
+      border-radius: 4px;
+      color: #fff;
+    }
+    /* Form đăng ký */
+    .signup-form {
+      background-color: var(--bg-light);
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      animation: fadeInUp 1s ease-out;
+    }
+    .signup-form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .signup-form input,
+    .signup-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 18px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    .signup-form textarea {
+      resize: vertical;
+    }
+    /* FAQ styles */
+    .faq {
+      margin: 25px 0;
+    }
+    .faq-item {
+      margin-bottom: 20px;
+    }
+    .faq-item h4 {
+      font-size: 1.2rem;
+      color: var(--primary-color);
+      margin-bottom: 5px;
+    }
+    .faq-item p {
+      font-size: 1rem;
+      margin-left: 20px;
+      line-height: 1.6;
+    }
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      header p {
+        font-size: 1rem;
+      }
+      .btn {
+        padding: 12px 25px;
+        font-size: 1rem;
+      }
+      #toggleAudio {
+        top: 10px;
+        right: 10px;
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+      .support-chat {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .support-chat a img {
+        width: 10px;  /* Điều chỉnh kích thước icon */
+        height: 10px;
+        border-radius: 50%; /* Tùy chọn: làm tròn góc nếu muốn */
+        transition: transform 0.3s;
+      }
+      .support-chat a img:hover {
+        transform: scale(1.1);
+      }
+    }
+  </style>
+</head>
+
+<!-- Phần hỗ trợ Zalo & Messenger -->
+<div class="support-chat">
+  <a href="https://zalo.me/0329915725" target="_blank" title="Chat với chúng tôi qua Zalo">
+    <img src="\Khóa Học 2026\Landing\Icon\Zalo.png" alt="Zalo">
+  </a>
+  <a href="https://m.me/vietstarmedia24" target="_blank" title="Chat với chúng tôi qua Messenger">
+    <img src="E:\Khóa Học 2026\Landing\Icon\Mesenger.png" alt="Messenger">
+  </a>
+</div>
+
+<!-- Script AJAX gửi dữ liệu form -->
+<script>
+  const form = document.getElementById('registrationForm');
+  if(form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault(); // Ngăn form submit truyền thống
+      
+      // Lấy dữ liệu từ form
+      const formData = {
+        fullname: document.getElementById('fullname').value,
+        phone: document.getElementById('phone').value,
+        email: document.getElementById('email').value,
+        goal: document.getElementById('goal').value
+      };
+      
+      // Gửi dữ liệu đến Google Apps Script endpoint
+      fetch("https://script.google.com/macros/s/AKfycbz2F0D35kBAQ4liCpSEgyf5zdqajFUd-UawaZZ5YV7ElHzoXbIxQqLmCrreoFrWWq93fA/exec", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(formData)
+})
+
+      })
+      .then(response => response.text())
+      .then(data => {
+        alert("Đăng ký thành công!");
+        form.reset();
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("Có lỗi xảy ra, vui lòng thử lại sau.");
+      });
+    });
+  }
+</script>
+
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <button id="toggleAudio">Bật âm thanh</button>
+      <h1>🎬 KHÓA HỌC QUAY DỰNG CHUYÊN NGHIỆP</h1>
+      <p>Học xong – Quay chất – Dựng nhanh – Bán hàng hiệu quả!</p>
+      <p>Tạo ra những video chuyên nghiệp để xây dựng thương hiệu cá nhân, tăng doanh thu và phát triển sự nghiệp tự do.</p>
+      <a href="#signup" class="btn">✨ Nhận Tư Vấn Miễn Phí</a>
+      <img src="header-image.jpg" alt="Hình minh họa khóa học chuyên nghiệp">
+    </header>
+
+    <!-- Vấn đề & Giải pháp -->
+    <section class="section">
+      <h2>🔍 VẤN ĐỀ – GIẢI PHÁP</h2>
+      <p><strong>Vấn đề:</strong></p>
+      <p>Bạn thường mất bao lâu để dựng xong 1 video? Liệu chất lượng video của bạn đã đủ để cạnh tranh với các đối thủ? Bạn đã từng bỏ lỡ ý tưởng chỉ vì không biết cách quay và dựng hiệu quả?</p>
+      <p><strong>Giải pháp:</strong></p>
+      <p>Khóa học của chúng tôi được xây dựng dựa trên nhu cầu thực tế, giúp bạn xử lý nhanh gọn các khâu quay – dựng – xuất bản video, đồng thời nâng cao chất lượng hình ảnh, âm thanh và kịch bản. Nhờ đó, bạn sẽ tự tin tạo ra sản phẩm video ấn tượng, chuyên nghiệp và thu hút khách hàng.</p>
+      <img src="tech-image1.jpg" alt="Giải pháp công nghệ trong quay dựng video">
+    </section>
+
+    <!-- Curriculum -->
+    <section class="section">
+      <h2>📚 NỘI DUNG KHÓA HỌC</h2>
+      <p><strong>Module 1: Cơ Bản Về Quay Video</strong></p>
+      <ul>
+        <li>Lựa chọn thiết bị (máy quay, điện thoại, micro, …)</li>
+        <li>Thiết lập ánh sáng, bố cục khung hình</li>
+        <li>Các mẹo quay để tạo hiệu ứng chuyên nghiệp</li>
+      </ul>
+      <p><strong>Module 2: Dựng Video Với Premiere</strong></p>
+      <ul>
+        <li>Giới thiệu giao diện và các công cụ chính</li>
+        <li>Cách cắt ghép, chèn hiệu ứng và âm thanh</li>
+        <li>Xuất video với định dạng chuẩn cho Facebook, YouTube, TikTok…</li>
+      </ul>
+      <p><strong>Module 3: Dựng Video Nhanh Gọn Bằng CapCut</strong></p>
+      <ul>
+        <li>Thao tác nhanh trên điện thoại</li>
+        <li>Thêm hiệu ứng, chuyển cảnh, text minh họa</li>
+        <li>Tối ưu video ngắn cho TikTok, Reels</li>
+      </ul>
+      <p><strong>Module 4: Kể Chuyện Bằng Video (Storytelling)</strong></p>
+      <ul>
+        <li>Xây dựng kịch bản và ý tưởng nội dung</li>
+        <li>Cách dẫn dắt câu chuyện, giữ chân khán giả đến cuối video</li>
+        <li>Áp dụng CTA thông minh để bán hàng</li>
+      </ul>
+      <p><strong>Module 5: Tối Ưu Video Cho Thương Hiệu Và Bán Hàng</strong></p>
+      <ul>
+        <li>Chiến lược đăng tải và tối ưu SEO cho video</li>
+        <li>Bí quyết tăng tương tác, thu hút khán giả trung thành</li>
+        <li>Kết hợp video marketing trong chiến dịch tổng thể</li>
+      </ul>
+      <p>Với lộ trình học rõ ràng, bạn sẽ nhận được kiến thức và kỹ năng thực tiễn, giúp bạn bước vào con đường chuyên nghiệp một cách tự tin.</p>
+      <img src="tech-image2.jpg" alt="Nội dung khóa học chuyên nghiệp">
+    </section>
+
+    <!-- Giảng viên & Đội ngũ hỗ trợ -->
+    <section class="section">
+      <h2>👩‍🏫 GIỚI THIỆU GIẢNG VIÊN & ĐỘI NGŨ HỖ TRỢ</h2>
+      <p><strong>Giảng viên:</strong> Chuyên gia với nhiều năm kinh nghiệm trong quay dựng và sản xuất video, đã hướng dẫn thành công hàng nghìn học viên đạt được các dự án đỉnh cao.</p>
+      <p><strong>Đội ngũ hỗ trợ:</strong> Luôn sẵn sàng tư vấn và giải đáp thắc mắc qua các kênh hỗ trợ như nhóm Facebook, Zalo, giúp bạn có quá trình học tập suôn sẻ và hiệu quả.</p>
+      <img src="tech-image3.jpg" alt="Đội ngũ giảng viên và hỗ trợ">
+    </section>
+
+    <!-- Chứng minh hiệu quả -->
+    <section class="section">
+      <h2>📊 CHỨNG MINH HIỆU QUẢ</h2>
+      <ul>
+        <li>1000+ học viên đã tốt nghiệp và tự tin kiếm tiền từ việc quay dựng video.</li>
+        <li>90% học viên phản hồi chất lượng khóa học vượt mong đợi.</li>
+        <li>Giúp tăng 30% – 50% doanh số bán hàng online cho các chủ shop.</li>
+      </ul>
+      <img src="tech-image4.jpg" alt="Số liệu thành công">
+    </section>
+
+    <!-- Social Proof -->
+    <section class="section">
+      <h2>💡 BẰNG CHỨNG XÃ HỘI</h2>
+      <p><strong>Case Study:</strong> Học viên A đã áp dụng kỹ năng từ khóa học để tạo ra video quảng cáo, giúp lượt xem tăng gấp đôi và đơn hàng tăng 40% chỉ sau 1 tháng. (Hình ảnh trước & sau nếu có)</p>
+      <img src="tech-image5.jpg" alt="Case Study: Trước và sau">
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <h2>❓ FAQ – CÁC CÂU HỎI THƯỜNG GẶP</h2>
+      <div class="faq">
+        <div class="faq-item">
+          <h4>Thời gian học bao lâu?</h4>
+          <p>Khóa học được thiết kế linh hoạt, bạn có thể hoàn thành trong vòng 4-6 tuần tùy theo tốc độ học tập.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Khóa học trực tuyến hay trực tiếp?</h4>
+          <p>Khóa học được tổ chức hoàn toàn trực tuyến, giúp bạn học mọi lúc, mọi nơi.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Có cần thiết bị quay chuyên nghiệp không?</h4>
+          <p>Không, bạn có thể bắt đầu với các thiết bị hiện có. Chúng tôi sẽ hướng dẫn cách tận dụng tối đa tiềm năng của thiết bị.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Nếu không biết gì về dựng video thì học được không?</h4>
+          <p>Chắc chắn! Khóa học từ cơ bản đến nâng cao, phù hợp với cả người mới bắt đầu.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Có hỗ trợ sau khi hoàn thành khóa học không?</h4>
+          <p>Chúng tôi luôn sẵn sàng hỗ trợ, giải đáp thắc mắc qua các kênh sau khóa học.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ưu đãi & Bảo hành -->
+    <section class="section">
+      <h2>🎁 ƯU ĐÃI & CHÍNH SÁCH BẢO HÀNH</h2>
+      <p><strong>Ưu đãi học phí:</strong> Giảm học phí lên đến 40% cho 50 học viên đầu tiên. Giá gốc và ưu đãi được trình bày chi tiết trong phần đăng ký.</p>
+      <p><strong>Chính sách hoàn tiền:</strong> Nếu không hài lòng sau khóa học, chúng tôi cam kết hoàn tiền 100% trong vòng 30 ngày.</p>
+      <p><strong>Bonus đi kèm:</strong> Tặng kèm tài liệu, template video, âm thanh, preset màu… cho học viên đăng ký sớm.</p>
+      <img src="tech-image6.jpg" alt="Ưu đãi & bảo hành">
+    </section>
+
+    <!-- CTA mạnh mẽ -->
+    <section class="section">
+      <h2>🚀 KHÔNG CHỜ ĐI, HÀNH ĐỘNG NGAY!</h2>
+      <p>Đừng bỏ lỡ cơ hội sở hữu kỹ năng quay dựng đẳng cấp. Đăng ký ngay để thoát khỏi cảnh loay hoay dựng video và bước vào con đường chuyên nghiệp!</p>
+      <div style="text-align:center; margin-top: 20px;">
+        <a href="#signup" class="btn">ĐĂNG KÝ NGAY</a>
+      </div>
+    </section>
+
+    <!-- Form Đăng ký -->
+    <section class="section" id="signup">
+      <h2>📋 ĐĂNG KÝ NGAY</h2>
+      <p>Điền thông tin của bạn để nhận tư vấn chi tiết và giữ chỗ học:</p>
+      <form class="signup-form" id="registrationForm">
+        <label for="fullname">Họ tên:</label>
+        <input type="text" id="fullname" name="fullname" required>
+        
+        <label for="phone">Số điện thoại:</label>
+        <input type="tel" id="phone" name="phone" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="goal">Mục tiêu học:</label>
+        <textarea id="goal" name="goal" rows="4" required placeholder="Giúp chúng tôi tư vấn lộ trình phù hợp nhất"></textarea>
+        
+        <div style="text-align:center;">
+          <button type="submit" class="btn">Đăng Ký</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <!-- Audio cho nhạc nền và hiệu ứng click -->
+  <audio id="bgMusic" loop muted>
+    <source src="\Khóa Học 2026\Landing\nhạc nền.mp3" type="audio/mpeg">
+    Trình duyệt của bạn không hỗ trợ thẻ audio.
+  </audio>
+  <audio id="clickSound">
+    <source src="\Khóa Học 2026\Landing\Click_02.wav" type="audio/mpeg">
+    Trình duyệt của bạn không hỗ trợ thẻ audio.
+  </audio>
+
+  <!-- Script điều khiển âm thanh và nút bật/tắt -->
+  <script>
+    // Nút bật/tắt âm thanh
+    const toggleButton = document.getElementById('toggleAudio');
+    const bgMusic = document.getElementById('bgMusic');
+    
+    // Mặc định âm thanh tắt (muted)
+    bgMusic.muted = true;
+    toggleButton.textContent = "Bật âm thanh";
+
+    toggleButton.addEventListener('click', function() {
+      bgMusic.muted = !bgMusic.muted;
+      // Cập nhật nhãn nút
+      toggleButton.textContent = bgMusic.muted ? "Bật âm thanh" : "Tắt âm thanh";
+      // Nếu vừa bật, hãy phát nhạc nền
+      if (!bgMusic.muted) {
+        bgMusic.play().catch(error => {
+          console.log("Lỗi khi phát nhạc nền: ", error);
+        });
+      }
+    });
+
+    // Phát nhạc nền tự động khi có tương tác đầu tiên (nếu chưa bật qua nút)
+    let bgMusicPlayed = false;
+    document.addEventListener('click', function() {
+      if (!bgMusicPlayed && !bgMusic.muted) {
+        bgMusic.play().catch(error => {
+          console.log("Nhạc nền không thể phát: ", error);
+        });
+        bgMusicPlayed = true;
+      }
+    });
+
+    // Hiệu ứng âm thanh cho nút
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        let clickSound = document.getElementById('clickSound');
+        clickSound.currentTime = 0;
+        clickSound.play();
+      });
+    });
+  </script>
+</body>
+
+<!-- Phần hỗ trợ Zalo & Messenger (CSS ở dưới) -->
+<div class="support-chat">
+  <a href="https://zalo.me/0329915725" target="_blank" title="Chat qua Zalo">
+    <img src="\Khóa Học 2026\Landing\Icon\Zalo.png" alt="Zalo">
+  </a>
+  <a href="https://m.me/vietstarmedia24" target="_blank" title="Chat qua Messenger">
+    <img src="\Khóa Học 2026\Landing\Icon\Mesenger.png" alt="Messenger">
+  </a>
+</div>
+
+<style>
+  .support-chat {
+    position: fixed;       /* Cố định vị trí */
+    bottom: 20px;          /* Cách đáy 20px */
+    right: 20px;           /* Cách phải 20px */
+    z-index: 9999;         /* Ưu tiên hiển thị trên các phần tử khác */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;             /* Khoảng cách giữa các icon */
+  }
+  .support-chat a img {
+    width: 50px;           /* Chiều rộng icon */
+    height: 50px;          /* Chiều cao icon */
+    border-radius: 50%;    /* Bo tròn nếu muốn */
+    transition: transform 0.3s;
+  }
+  .support-chat a img:hover {
+    transform: scale(1.1); /* Phóng to nhẹ khi hover */
+  }
+</style>
+
+</html>
